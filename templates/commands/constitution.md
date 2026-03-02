@@ -14,6 +14,32 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Phase 0 (optional): Project knowledge base bootstrap
+
+If the project has no or minimal knowledge-base docs under `.specify/memory/` (e.g. `.specify/memory/产品/产品概述.md` and `.specify/memory/技术架构/技术栈要求.md` are missing), run this **before** the constitution update so the project has a baseline. Skip if those files already exist and are populated.
+
+1. **Read shared rules** (required for quality):
+   - `.specify/settings/rules/doc-responsibility.md` — document boundaries and which docs to generate
+   - `.specify/settings/rules/doc-quality-criteria.md` — accuracy and readability rules (code references, MUST/SHOULD)
+   - `.specify/settings/rules/tech-stack-catalog.md` — tech stack categories
+
+2. **Phase 1 — Foundation**: Explore the repo, then create:
+   - `.specify/memory/产品/产品概述.md` — product positioning, main modules, key flows (with code refs)
+   - `.specify/memory/技术架构/技术栈要求.md` — language, framework, middleware, base products, core libs (with versions and file:line refs). Prefer `mvn dependency:tree` (or equivalent) for real dependencies.
+
+3. **Phase 2 — Plan**: Decide which docs to generate using doc-responsibility.md:
+   - No business Web/RPC → skip Web/RPC interface norms; no DB → skip 数据库规范.md, 持久层规范.md; no external systems → skip 外部系统集成.md.
+   - Architecture: traditional layered → 服务层规范.md; DDD → 领域模型规范.md; etc.
+
+4. **Phase 3 — Generate in batches** (strict order, batch-internal serial):
+   - **Batch 1**: `.specify/memory/技术架构/系统模式.md` — layering, module deps, directory tree, mermaid diagrams.
+   - **Batch 2** (conditional): 外部系统集成.md, 业务能力服务.md, 中间件&基础产品封装.md under `.specify/memory/技术架构/` when applicable.
+   - **Batch 3** (conditional): 数据库规范.md, 服务层规范.md or 领域模型规范.md under `.specify/memory/规范/` when applicable.
+
+5. **Phase 4**: Update `.specify/memory/AGENTS.md`: scan `.specify/memory/产品/`, `.specify/memory/技术架构/`, `.specify/memory/规范/` and refresh the **应用知识** table inside `<project_rules>` (technology, scenarios, keywords, file path with `.specify/memory/` prefix).
+
+Rules: every claim must have a code reference (path:line). Use MUST/SHOULD/MAY. Prefer less content over wrong content. Single doc ≤500 lines. Then proceed to the constitution update below.
+
 ## Outline
 
 You are updating the project constitution at `.specify/memory/constitution.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[PRINCIPLE_1_NAME]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely, and (c) propagate any amendments across dependent artifacts.

@@ -1,0 +1,59 @@
+### 阿里巴巴Java开发规范
+- All names should not start or end with an underline or a dollar sign.
+- Using Chinese, Pinyin, or Pinyin-English mixed spelling in naming is strictly prohibited.
+- Class names should be nouns in UpperCamelCase except domain models: DO, BO, DTO, VO, etc.
+- Method names, parameter names, member variable names, and local variable names should be written in lowerCamelCase.
+- Constant variable names should be written in upper characters separated by underscores.
+- Abstract class names must start with Abstract or Base.
+- Exception class names must end with Exception.
+- Test cases shall start with the class names to be tested and end with Test.
+- Brackets are part of an Array type; definition like String[] args is preferred.
+- Do not add 'is' as a prefix while defining Boolean variables.
+- Packages should be named in lowercase characters with only one English word after each dot.
+- Uncommon abbreviations should be avoided for legibility.
+- The pattern name should be included in the class name if any design pattern is used.
+- Do not add any modifier to methods in interface classes; use Javadoc comments.
+- Service and DAO implementation class names should end with Impl.
+- Enumeration class names should end with Enum with members in uppercase separated by underlines.
+- Magic values, except predefined ones, are forbidden in coding.
+- Use 'L' instead of 'l' for long or Long variables.
+- Constants should be placed in different constant classes based on their functions.
+- Constants can be shared across five layers: multiple applications, within an application, sub-project, package, or class.
+- Enumeration classes should be used if variables have fixed ranges or attributes.
+- Rules for braces include using {} if no content, line breaks after opening brace, before closing brace, etc.
+- No space between '(' and its following character or ')' and its preceding character.
+- One space required between keywords (if/for/while/switch) and parentheses.
+- One space at both sides of operators (=, &&, +, -, etc.).
+- Indent increases by four spaces for new blocks; tabs are not used for indentation.
+- Java code has a column limit of 120 characters; lines exceeding this must be wrapped properly.
+- One space between a comma and the next parameter for multiple parameters.
+- Text files should use UTF-8 encoding with Unix-style line breaks.
+- Lowercase "y" should be used for year in date formatting.
+- Aligning variables with multiple spaces is unnecessary.
+- A method's total number of lines should not exceed 80.
+- Sections with same logic should be separated by a single blank line.
+- Static fields or methods should be referred to by class name directly.
+- Overridden methods from interfaces or abstract classes must be marked with @Override.
+- Varargs should be used only if all parameters are of the same type and semantics.
+- Modifying method signatures is forbidden; deprecated interfaces should use @Deprecated annotation.
+- Using deprecated classes or methods is prohibited.
+- Equals method should be invoked by a constant or non-null object.
+- Wrapper classes should be compared using equals(), not ==.
+- Floating-point numbers should not be compared using == or equals(); use error range or BigDecimal.
+- Avoid using BigDecimal(double) constructor due to accuracy loss.
+- POJO members and RPC return values/arguments should be wrapper classes; local variables can be primitive types.
+- Default values should not be assigned to members in POJO classes.
+- serialVersionUID should not be changed when updating serialized classes.
+- Business logic should not be placed in constructors; use init method instead.
+- toString() must be implemented in POJO classes.
+- Check array length when accessing split() results to avoid IndexOutOfBoundsException.
+- Constructor methods or homonymous methods should be grouped together.
+- Methods in a class should follow public/protected -> private -> getter/setter order.
+- Setter method arguments should match field names; business logic in getters/setters is discouraged.
+- Use StringBuilder.append() inside loops for string concatenation.
+- Use final keyword where applicable (class, argument, method).
+- Be cautious when using clone() method due to shallow copy behavior.
+- Restrict access levels of class members/methods strictly.
+- Override hashCode() if overriding equals(); necessary for Set and Map keys.
+- Do not modify collection objects returned by keySet()/values()/entrySet().
+- Do not modify immutable objects returned by Collections methods like emptyList()/singletonList().

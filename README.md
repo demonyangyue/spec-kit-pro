@@ -91,9 +91,9 @@ uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME
 
 ### 2. Establish project principles
 
-Launch your AI assistant in the project directory. The `/speckit.*` commands are available in the assistant.
+`specify init` creates or extends `.specify/` with memory (产品, 技术架构, 规范, 公共), `settings/rules`, and `AGENTS.md`. Launch your AI assistant in the project directory. The `/speckit.*` commands are available in the assistant.
 
-Use the **`/speckit.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
+Use the **`/speckit.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development. On first run, if the project has no knowledge-base docs yet (e.g. under `.specify/memory/产品/` or `.specify/memory/技术架构/`), the command can also generate a product overview and tech-stack baseline and update `.specify/memory/AGENTS.md`.
 
 ```bash
 /speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements

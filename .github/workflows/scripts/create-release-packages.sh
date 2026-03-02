@@ -133,7 +133,11 @@ build_variant() {
   mkdir -p "$SPEC_DIR"
   
   [[ -d memory ]] && { cp -r memory "$SPEC_DIR/"; echo "Copied memory -> .specify"; }
-  
+  # Knowledge-base empty dirs for product/architecture/norms (cold-start bootstrap)
+  mkdir -p "$SPEC_DIR/memory/产品/自定义" "$SPEC_DIR/memory/技术架构/自定义" "$SPEC_DIR/memory/规范/自定义"
+
+  [[ -d settings ]] && { cp -r settings "$SPEC_DIR/"; echo "Copied settings -> .specify"; }
+
   # Only copy the relevant script variant directory
   if [[ -d scripts ]]; then
     mkdir -p "$SPEC_DIR/scripts"

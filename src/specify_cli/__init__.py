@@ -1552,7 +1552,7 @@ def init(
 
     steps_lines.append(f"{step_num}. Start using slash commands with your AI agent:")
 
-    steps_lines.append("   2.1 [cyan]/speckit.constitution[/] - Establish project principles")
+    steps_lines.append("   2.1 [cyan]/speckit.constitution[/] - Establish project principles (and generate product overview / tech stack if the knowledge base is empty)")
     steps_lines.append("   2.2 [cyan]/speckit.specify[/] - Create baseline specification")
     steps_lines.append("   2.3 [cyan]/speckit.plan[/] - Create implementation plan")
     steps_lines.append("   2.4 [cyan]/speckit.tasks[/] - Generate actionable tasks")
