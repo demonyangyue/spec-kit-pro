@@ -16,7 +16,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Phase 0 (optional): Project knowledge base bootstrap
 
-If the project has no or minimal knowledge-base docs under `.specify/memory/` (e.g. `.specify/memory/产品/产品概述.md` and `.specify/memory/技术架构/技术栈要求.md` are missing), run this **before** the constitution update so the project has a baseline. Skip if those files already exist and are populated.
+If the project has no or minimal knowledge-base docs under `.specify/memory/` (e.g. `.specify/memory/product/product-overview.md` and `.specify/memory/architecture/tech-stack.md` are missing), run this **before** the constitution update so the project has a baseline. Skip if those files already exist and are populated.
 
 1. **Read shared rules** (required for quality):
    - `.specify/settings/rules/doc-responsibility.md` — document boundaries and which docs to generate
@@ -24,19 +24,19 @@ If the project has no or minimal knowledge-base docs under `.specify/memory/` (e
    - `.specify/settings/rules/tech-stack-catalog.md` — tech stack categories
 
 2. **Phase 1 — Foundation**: Explore the repo, then create:
-   - `.specify/memory/产品/产品概述.md` — product positioning, main modules, key flows (with code refs)
-   - `.specify/memory/技术架构/技术栈要求.md` — language, framework, middleware, base products, core libs (with versions and file:line refs). Prefer `mvn dependency:tree` (or equivalent) for real dependencies.
+   - `.specify/memory/product/product-overview.md` — product positioning, main modules, key flows (with code refs)
+   - `.specify/memory/architecture/tech-stack.md` — language, framework, middleware, base products, core libs (with versions and file:line refs). Prefer `mvn dependency:tree` (or equivalent) for real dependencies.
 
 3. **Phase 2 — Plan**: Decide which docs to generate using doc-responsibility.md:
-   - No business Web/RPC → skip Web/RPC interface norms; no DB → skip 数据库规范.md, 持久层规范.md; no external systems → skip 外部系统集成.md.
-   - Architecture: traditional layered → 服务层规范.md; DDD → 领域模型规范.md; etc.
+   - No business Web/RPC → skip Web/RPC interface norms; no DB → skip database-norms.md, persistence-norms.md; no external systems → skip external-integration.md.
+   - Architecture: traditional layered → service-layer-norms.md; DDD → domain-model-norms.md; etc.
 
 4. **Phase 3 — Generate in batches** (strict order, batch-internal serial):
-   - **Batch 1**: `.specify/memory/技术架构/系统模式.md` — layering, module deps, directory tree, mermaid diagrams.
-   - **Batch 2** (conditional): 外部系统集成.md, 业务能力服务.md, 中间件&基础产品封装.md under `.specify/memory/技术架构/` when applicable.
-   - **Batch 3** (conditional): 数据库规范.md, 服务层规范.md or 领域模型规范.md under `.specify/memory/规范/` when applicable.
+   - **Batch 1**: `.specify/memory/architecture/system-pattern.md` — layering, module deps, directory tree, mermaid diagrams.
+   - **Batch 2** (conditional): external-integration.md, business-services.md, middleware-and-base.md under `.specify/memory/architecture/` when applicable.
+   - **Batch 3** (conditional): database-norms.md, service-layer-norms.md or domain-model-norms.md under `.specify/memory/norms/` when applicable.
 
-5. **Phase 4**: Update `.specify/memory/AGENTS.md`: scan `.specify/memory/产品/`, `.specify/memory/技术架构/`, `.specify/memory/规范/` and refresh the **应用知识** table inside `<project_rules>` (technology, scenarios, keywords, file path with `.specify/memory/` prefix).
+5. **Phase 4**: Update `.specify/memory/AGENTS.md`: scan `.specify/memory/product/`, `.specify/memory/architecture/`, `.specify/memory/norms/` and refresh the **应用知识** table inside `<project_rules>` (technology, scenarios, keywords, file path with `.specify/memory/` prefix).
 
 Rules: every claim must have a code reference (path:line). Use MUST/SHOULD/MAY. Prefer less content over wrong content. Single doc ≤500 lines. Then proceed to the constitution update below.
 

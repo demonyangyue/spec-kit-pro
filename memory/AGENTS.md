@@ -93,8 +93,8 @@
 
 | 名称 | 使用场景 | 关键词 | 文件路径 |
 |--------|---------|--------|---------|
-| **Java开发规范** | 编写代码、代码审查、规范检查 | Java开发规范、阿里巴巴规范、命名规范、驼峰命名、UpperCamelCase、lowerCamelCase、常量命名、包名规范、魔法值、POJO规范、equals、hashCode、toString、serialVersionUID | `.specify/memory/公共/规约/Java开发规范.md` |
-| **Effective Java** | 类设计、方法设计、性能优化 | Effective Java、Builder模式、工厂方法、单例模式、私有构造方法、依赖注入、不可变类、组合优于继承、接口优于抽象类、泛型、枚举、EnumSet、EnumMap、Lambda、Stream | `.specify/memory/公共/规约/effective-java.md` |
+| **Java开发规范** | 编写代码、代码审查、规范检查 | Java开发规范、阿里巴巴规范、命名规范、驼峰命名、UpperCamelCase、lowerCamelCase、常量命名、包名规范、魔法值、POJO规范、equals、hashCode、toString、serialVersionUID | `.specify/memory/common/conventions/java-conventions.md` |
+| **Effective Java** | 类设计、方法设计、性能优化 | Effective Java、Builder模式、工厂方法、单例模式、私有构造方法、依赖注入、不可变类、组合优于继承、接口优于抽象类、泛型、枚举、EnumSet、EnumMap、Lambda、Stream | `.specify/memory/common/conventions/effective-java.md` |
 </common_rules>
 
 ---
