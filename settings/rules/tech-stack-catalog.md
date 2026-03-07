@@ -9,21 +9,7 @@
 - 隔离容器: Pandora
 - 测试框架: JUnit  / Mockito / ...
 
-## 2. 中间件识别
-
-- RPC: HSF(HSFProvide,HSFConsumer,BizServiceProvider)
-- 分布式任务调度: Schedulerx(JavaProcessor,MapJobProcessor)
-- 分布式配置中心: Diamond
-- 分布式缓存: Redis / Tair
-- 消息队列: MetaQ / RocketMQ
-- 限流: Sentinel
-- 链路追踪: EagleEye
-- 对象存储: OSS
-- 数据仓库解决方案：ODPS
-- 分布式数据库：TDDL
-- 日志服务：SLS
-
-## 3. 基础产品识别
+## 2. 基础产品识别
 
 有且仅有：
 - 权限中心: ACL，提供的服务通常位于 `com.alibaba.buc.acl.*` 包下
@@ -33,7 +19,7 @@
 - 国际化：美杜莎(MCMS)
 - 网关：EPaaS网关/Top网关
 
-## 4. 类库识别
+## 3. 类库识别
 
 - 对象转换: MapStruct / Dozer / ...
 - JSON序列化: Fastjson / Jackson / Gson / ...

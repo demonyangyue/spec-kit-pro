@@ -19,11 +19,11 @@
 | 文档名称 | 包含内容 |
 | --- |---------------|
 | **system-pattern.md** | 分层架构定义, 系统架构图, 目录树和模块划分, 包职责说明, 模块依赖关系,关键架构模式（设计模式、Router路由、SPI扩展、事件驱动等） |
-| **tech-stack.md** | 框架名称和版本, 分布式中间件和基础产品, 核心类库, 技术栈使用说明 |
+| **tech-stack.md** | 框架名称和版本, 基础产品, 核心类库, 技术栈使用说明 |
 | **business-services.md** | 应用内部多次被使用的内部服务封装, 如：统一查询审批人 |
 | **external-integration.md** | 外部系统集成能力清单, 如：采购、法务、资产、财务, 集成代码位置, 使用场景说明 |
 | **常用内部工具类.md** | 工具类清单, Public方法签名, 使用场景说明 |
-| **middleware-and-base.md** | 中间件（diamond、eagleeye、hsf、metaq、odps、schedulerx、sentinel、sls、tair）及基础产品（acl、amdp、bpms、buc、epaas、mcms、mozi、top）在当前项目内的能力封装及封装类文件路径 |
+| **middleware-and-base.md** | 基础产品（acl、amdp、bpms、buc、epaas、mcms、mozi、top）在当前项目内的能力封装及封装类文件路径 |
 
 ### 规范类
 
@@ -109,25 +109,6 @@
 
 ## 通用概念定义
 
-### 中间件
-
-**定义**：提供通用技术能力的分布式中间件，不涉及具体业务逻辑
-
-**典型示例**：
-- 消息队列：MetaQ、RocketMQ
-- 分布式缓存：Redis、Tair
-- 配置中心：Diamond
-- 定时任务：SchedulerX
-- RPC框架：HSF
-- 分布式链路追踪：eagleeye
-- 大数据计算平台：odps
-- 流量治理：sentinel
-- 日志服务：sls
-
-**记录位置**：
-- 基础包、版本记录在 tech-stack.md
-- 应用内的封装及使用记录在 middleware-and-base.md
-
 ### 基础产品
 
 **定义**：封装了企业内基础的能力，提供业务级API，通常是公司/组织内的共享平台
@@ -207,12 +188,11 @@
 
 
 
-### 中间件&基础产品封装
+### 基础产品封装
 
-**定义**：应用内对使用的中间件和基础产品封装，方便统一管理及调用
+**定义**：应用内对使用的基础产品封装，方便统一管理及调用
 
 **典型示例**：
-- 封装统一的MQ处理，应用内仅需继承抽象类，实现固定方法，简化使用
 - 封装了ACL的接口，应用内仅需调用相关的封装类即可
 
 **记录位置**：middleware-and-base.md
