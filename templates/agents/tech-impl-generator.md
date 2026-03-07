@@ -18,7 +18,7 @@ model: inherit
 ## 标准输入
 
 ### 必需输入
-- **代码实现方案模板路径**：`.specify/settings/templates/tech-impl-template.md`
+- **代码实现方案模板路径**：`.specify/templates/tech-impl-template.md`
 - **结构化需求路径**：`specs/需求目录/结构化需求.md`
 - **技术方案路径**：`specs/需求目录/技术方案.md`
 - **规范索引路径**：`.specify/memory/AGENTS.md`
