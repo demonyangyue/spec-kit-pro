@@ -107,6 +107,8 @@ Use the **`/speckit.specify`** command to describe what you want to build. Focus
 /speckit.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
 ```
 
+If you have a PRD document, use `/speckit.parse-prd path/to/prd.md` to generate a **set of specs** (structured requirements in EARS format), then proceed to step 4.
+
 ### 4. Create a technical implementation plan
 
 Use the **`/speckit.plan`** command to provide your tech stack and architecture choices.
@@ -130,6 +132,10 @@ Use **`/speckit.implement`** to execute all tasks and build your feature accordi
 ```bash
 /speckit.implement
 ```
+
+### 7. Archive (optional)
+
+When the feature is complete and deployed, use `/speckit.archive` with the feature number or directory name (e.g. `001` or `001-photo-albums`) to merge the feature's knowledge into `.specify/memory/` and move the spec to `specs/archive/`.
 
 For detailed step-by-step instructions, see our [comprehensive guide](./spec-driven.md).
 
@@ -279,6 +285,8 @@ Additional commands for enhanced quality and validation:
 | `/speckit.clarify`   | Clarify underspecified areas (recommended before `/speckit.plan`; formerly `/quizme`)                                                |
 | `/speckit.analyze`   | Cross-artifact consistency & coverage analysis (run after `/speckit.tasks`, before `/speckit.implement`)                             |
 | `/speckit.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
+| `/speckit.parse-prd` | Generate a **set of specs** (structured requirements in EARS format) from a PRD; provide PRD path (e.g. `/speckit.parse-prd path/to/prd.md`). Then continue with `/speckit.plan`. |
+| `/speckit.archive`   | Archive a completed feature: merge requirements and code learnings into the project knowledge base (`.specify/memory/`), move the spec directory to `specs/archive/`. Provide feature number or directory name (e.g. `001` or `001-feature-name`). Run from repo root after the feature is implemented and committed. |
 
 ### Environment Variables
 
