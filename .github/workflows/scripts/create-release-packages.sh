@@ -155,7 +155,14 @@ build_variant() {
     esac
   fi
   
-  [[ -d templates ]] && { mkdir -p "$SPEC_DIR/templates"; find templates -type f -not -path "templates/commands/*" -not -name "vscode-settings.json" -exec cp --parents {} "$SPEC_DIR"/ \; ; echo "Copied templates -> .specify/templates"; }
+  [[ -d templates ]] && {
+    mkdir -p "$SPEC_DIR/templates"
+    while IFS= read -r -d '' f; do
+      mkdir -p "$SPEC_DIR/$(dirname "$f")"
+      cp "$f" "$SPEC_DIR/$f"
+    done < <(find templates -type f -not -path "templates/commands/*" -not -name "vscode-settings.json" -print0)
+    echo "Copied templates -> .specify/templates"
+  }
 
   [[ -d templates/agents ]] && { mkdir -p "$SPEC_DIR/agents"; cp -r templates/agents/* "$SPEC_DIR/agents/"; echo "Copied templates/agents -> .specify/agents"; }
   
