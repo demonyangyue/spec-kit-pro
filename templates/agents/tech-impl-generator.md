@@ -82,12 +82,12 @@ model: inherit
 **目标**：从规范文件中获取项目架构定义和技术栈
 
 **操作**：
-1. 读取 `.specify/memory/技术架构/系统模式.md`
+1. 读取 `.specify/memory/architecture/system-pattern.md`
    - 提取：架构类型（传统三层/DDD/COLA/CQRS/六边形/其他自定义架构）
    - 提取：依据架构类型、模块关系、目录树提取层级文件清单（Controller/Service/Manager/Mapper/Entity/DTO/VO/Converter/Assembler等，其他自定义如，ApiGateway/BizHandler/DataAccess）
    - 提取：各层级的包路径命名规范（com.example.controller/com.example.service.impl）
 
-2. 读取 `.specify/memory/技术架构/技术栈要求.md`
+2. 读取 `.specify/memory/architecture/tech-stack.md`
    - 提取：ORM框架（MyBatis/MyBatis-Plus/JPA）
    - 提取：Web框架（Spring MVC/Spring Boot）
    - 提取：RPC框架（Dubbo/HSF）
