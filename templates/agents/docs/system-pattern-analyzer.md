@@ -56,7 +56,7 @@ model: inherit
    - COLA: adapter → app → domain → infrastructure
    - CQRS: command/query → handler → model → repository/event
    - 六边形: adapter(in/out) → port(in/out) → domain → application
-   - AECP：只有引入 aecp-logic SDK，同时满足其继承关系的应用才是AECP架构，否则一定不是AECP架构，api → sdk → biz(service/bo/dao)
+   - SDK 分层（api → sdk → biz(service/bo/dao)）：仅当项目引入符合约定继承关系的 SDK（如某 logic SDK）时识别为该架构，否则不识别为该架构
    - 根据项目信息推断出来的其他架构分层模式
 
    识别方法:
