@@ -23,7 +23,7 @@
 | **business-services.md** | 应用内部多次被使用的内部服务封装, 如：统一查询审批人 |
 | **external-integration.md** | 外部系统集成能力清单, 如：采购、法务、资产、财务, 集成代码位置, 使用场景说明 |
 | **常用内部工具类.md** | 工具类清单, Public方法签名, 使用场景说明 |
-| **middleware-and-base.md** | 基础产品（acl、amdp、bpms、buc、epaas、mcms、mozi、top）在当前项目内的能力封装及封装类文件路径 |
+| **middleware-and-base.md** | 基础产品在当前项目内的能力封装及封装类文件路径 |
 
 ### 规范类
 
@@ -32,7 +32,7 @@
 | 层次 | 规范文档 | 说明 |
 | --- | --- | --- |
 | **接入层-Web** | Web接口规范.md | Controller层标准、请求响应规范、参数校验规则、错误处理规范 |
-| **接入层-RPC** | RPC接口规范.md | HSF RPC接口规范 |
+| **接入层-RPC** | RPC接口规范.md | RPC 接口规范 |
 | **业务层** | service-layer-norms.md | Service层规范、业务逻辑封装 |
 | **数据存储层** | database-norms.md | 表结构规则、字段类型规范、通用/扩展/枚举/逻辑删除/乐观锁/租户/组织字段规范 |
 | **持久层** | persistence-norms.md | Entity/DAO/Mapper规范、CRUD和分页查询写法、ORM框架使用规范、通用字段填充方式 |
@@ -42,7 +42,7 @@
 | 层次 | 规范文档 | 说明 |
 | --- | --- | --- |
 | **接入层-Web** | Web接口规范.md | Web接口层设计标准、请求响应规范、参数校验规则、错误处理规范 |
-| **接入层-RPC** | RPC接口规范.md | HSF RPC接口层规范 |
+| **接入层-RPC** | RPC接口规范.md | RPC 接口层规范 |
 | **编排层** | 应用service-layer-norms.md | 应用服务规范、事务编排 |
 | **业务层** | 领域service-layer-norms.md | 领域服务规范、业务能力抽象 |
 | **领域模型层** | domain-model-norms.md | 实体/值对象/聚合根规范 |
@@ -55,7 +55,7 @@
 | 层次 | 规范文档 | 说明 |
 | --- | --- | --- |
 | **接入层-Web** | Web适配器规范.md | Web适配器设计标准、请求响应规范、参数校验规则、错误处理规范 |
-| **接入层-RPC** | RPC适配器规范.md | HSF RPC适配器规范 |
+| **接入层-RPC** | RPC适配器规范.md | RPC 适配器规范 |
 | **编排层** | 执行器层规范.md | Command/Query执行器规范 |
 | **业务层** | 领域service-layer-norms.md | 领域服务规范、业务能力抽象 |
 | **领域模型层** | domain-model-norms.md | 实体/值对象规范 |
@@ -95,7 +95,7 @@
 
 | 层次 | 规范文档 | 说明 |
 | --- | --- | --- |
-| **接入层-RPC** | RPC接口规范.md | HSF服务接口规范（@HSFProvider/@BizServiceProvider） |
+| **接入层-RPC** | RPC接口规范.md | RPC 服务接口规范 |
 | **接入层-Web** | Web接口规范.md | Controller层设计标准、请求响应规范、参数校验规则、错误处理规范 |
 | **业务对象层** | BO层规范.md | BO接口和实现规范（AutoBizObject/BizObjectImpl）、业务逻辑封装 |
 | **领域模型层** | domain-model-norms.md | DomainObject/DataObject规范 |
@@ -113,14 +113,7 @@
 
 **定义**：封装了企业内基础的能力，提供业务级API，通常是公司/组织内的共享平台
 
-有且仅有：
-- 权限中心: ACL，提供的服务通常位于 `com.alibaba.buc.acl.*` 包下
-- 统一身份管理/登录: Mozi / BUC，提供的服务通常位于 `com.alibaba.mozi.*`, `com.alibaba.buc.*` 包下
-- 审批流/工作流: Ali Bpms，提供的服务通常位于 `com.alibaba.alipmc.*` 包下
-- 企业主数据平台: AMDP / MasterData，提供的服务通常位于 `com.alibaba.ihr.amdplatform.*` `com.alibaba.masterdata.*` 包下
-- EPaaS网关：API路由网关
-- 美杜莎(mcms)：国际化文案管理系统，支持多语言文案管理和获取
-- Top网关：淘宝开放平台，提供标准化API调用、批量处理、消息监听、就近路由能力
+根据实际企业基础能力识别，在 tech-stack.md 与 middleware-and-base.md 中记录。
 
 **记录位置**：
 - 基础包、版本记录在 tech-stack.md
@@ -193,7 +186,7 @@
 **定义**：应用内对使用的基础产品封装，方便统一管理及调用
 
 **典型示例**：
-- 封装了ACL的接口，应用内仅需调用相关的封装类即可
+- 封装了基础产品的接口，应用内仅需调用相关的封装类即可
 
 **记录位置**：middleware-and-base.md
 
