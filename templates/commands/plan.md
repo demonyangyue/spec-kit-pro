@@ -26,11 +26,27 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot"). If FEATURE_SPEC is missing or unreadable, abort and suggest running `/speckit.specify` or `/speckit.parse-prd` first.
 
-2. **Load context**: Read FEATURE_SPEC and `/memory/constitution.md`. Load IMPL_PLAN template (already copied).
+2. **Prepare / Load context**:
+   - Read `.specify/memory/AGENTS.md` and load referenced docs (norms, tech stack, architecture) as needed.
+   - Read FEATURE_SPEC in full: feature description, user stories, flows.
+   - Read `/memory/constitution.md`. Load IMPL_PLAN template (already copied).
+   - Optionally: explore codebase for existing APIs, entities, and reusable components; or delegate gap-analyst if the project uses `specs/` and gap analysis—if not applicable, skip.
+   - **Checkpoint**: Spec read; norms/templates read; (if applicable) gap or reuse identified.
 
-3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
+3. **Requirements / scope analysis**: From FEATURE_SPEC extract and list briefly:
+   - Core requirements and user stories
+   - Key entities and relationships
+   - Main flows and constraints (and permissions if relevant)
+   So the plan workflow is scope-aware.
+
+4. **Technical decision clarification (if needed)**:
+   - **Decision tree** (evaluate in order): (a) All technical decisions have clear best practice or template guidance → skip; use **[Suggested]** with rationale where needed. (b) Can be inferred from codebase or norms → skip; follow existing style. (c) At least one critical technical uncertainty → ask (max 2 questions).
+   - **Clarification format**: Use a table: Option | Answer | Implications. Technical only (no requirement questions; those belong in specify/parse-prd). Max 2 questions; each option should state when it applies.
+   - **When not asking**: Proceed with **[Suggested]** and brief rationale (e.g. "based on existing codebase style", "industry best practice").
+
+5. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
    - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
    - Fill Constitution Check section from constitution
    - Evaluate gates (ERROR if violations unjustified)
@@ -39,7 +55,18 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Phase 1: Update agent context by running the agent script
    - Re-evaluate Constitution Check post-design
 
-4. **Stop and report**: Command ends after Phase 2 planning. Report branch, IMPL_PLAN path, and generated artifacts.
+6. **Quality verification** (before reporting): Check the plan and generated artifacts:
+   - **Accuracy**: Every design element traceable to FEATURE_SPEC; no out-of-scope design; user stories and acceptance criteria covered.
+   - **Operability**: Key logic described (pseudocode/flowcharts where helpful); exceptions and edge cases mentioned.
+   - **Readability**: Follow template section order; prefer diagrams over long text; naming self-explanatory.
+   - **Completeness**: Unambiguous; pre/post conditions and state transitions explicit where relevant.
+   If checks fail: list issues, fix, then re-check (e.g. one round); then report.
+
+7. **Report**: Command ends after planning. Produce a **minimal report**:
+   - IMPL_PLAN path and branch
+   - Short overview: main artifacts (e.g. research.md, data-model.md, contracts), and 1–2 line summary of scope
+   - Readiness for next phase (e.g. `/speckit.tasks` or `/speckit.checklist`)
+   Do not include a long checklist in the report; keep it minimal.
 
 ## Phases
 
@@ -94,3 +121,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 - Use absolute paths
 - ERROR on gate failures or unresolved clarifications
+
+## Important constraints and safety
+
+- **Clarification**: Ask questions only in the Technical decision clarification step; max 2 questions; technical only. Requirement gaps or ambiguities → suggest revising the spec or running `/speckit.specify` or `/speckit.parse-prd`.
+- **Safety**: If FEATURE_SPEC is missing or unreadable, abort and suggest running `/speckit.specify` or `/speckit.parse-prd` first.
