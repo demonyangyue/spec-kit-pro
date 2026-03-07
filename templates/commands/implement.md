@@ -48,13 +48,13 @@ You **MUST** consider the user input before proceeding (if not empty).
      - Display the table showing all checklists passed
      - Automatically proceed to step 3
 
-3. Load and analyze the implementation context:
-   - **REQUIRED**: Read tasks.md for the complete task list and execution plan
-   - **REQUIRED**: Read plan.md for tech stack, architecture, and file structure
-   - **IF EXISTS**: Read data-model.md for entities and relationships
-   - **IF EXISTS**: Read contracts/ for API specifications and test requirements
-   - **IF EXISTS**: Read research.md for technical decisions and constraints
-   - **IF EXISTS**: Read quickstart.md for integration scenarios
+3. Load and analyze the implementation context (all paths in this step are under FEATURE_DIR from step 1):
+   - **REQUIRED**: Read FEATURE_DIR/tasks.md for the complete task list and execution plan
+   - **REQUIRED**: Read FEATURE_DIR/plan.md for tech stack, architecture, and file structure
+   - **IF EXISTS**: Read FEATURE_DIR/data-model.md for entities and relationships
+   - **IF EXISTS**: Read FEATURE_DIR/contracts/ for API specifications and test requirements
+   - **IF EXISTS**: Read FEATURE_DIR/research.md for technical decisions and constraints
+   - **IF EXISTS**: Read FEATURE_DIR/quickstart.md for integration scenarios
 
 4. **Project Setup Verification**:
    - **REQUIRED**: Create/verify ignore files based on actual project setup:

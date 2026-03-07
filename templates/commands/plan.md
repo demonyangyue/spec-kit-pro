@@ -31,7 +31,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 2. **Prepare / Load context**:
    - Read `.specify/memory/AGENTS.md` and load referenced docs (norms, tech stack, architecture) as needed.
    - Read FEATURE_SPEC in full: feature description, user stories, flows.
-   - Read `/memory/constitution.md`. Load IMPL_PLAN template (already copied).
+   - Read `.specify/memory/constitution.md`. Load IMPL_PLAN template (already copied).
    - Optionally: explore codebase for existing APIs, entities, and reusable components; or delegate gap-analyst if the project uses `specs/` and gap analysis—if not applicable, skip.
    - **Checkpoint**: Spec read; norms/templates read; (if applicable) gap or reuse identified.
 

@@ -71,7 +71,7 @@ Given that feature description, do this:
    - The JSON output will contain BRANCH_NAME and SPEC_FILE paths
    - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot")
 
-3. Load `templates/spec-template.md` to understand required sections.
+3. Load `.specify/templates/spec-template.md` to understand required sections. If your project uses a different layout, use the path where the template was installed.
 
 4. Follow this execution flow:
 
@@ -148,7 +148,7 @@ Given that feature description, do this:
 
    c. **Handle Validation Results**:
 
-      - **If all items pass**: Mark checklist complete and proceed to step 6
+      - **If all items pass**: Mark checklist complete and proceed to step 7
 
       - **If items fail (excluding [NEEDS CLARIFICATION])**:
         1. List the failing items and specific issues
