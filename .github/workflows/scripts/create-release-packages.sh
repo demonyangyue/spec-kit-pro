@@ -174,7 +174,12 @@ build_variant() {
   case $agent in
     claude)
       mkdir -p "$base_dir/.claude/commands"
-      generate_commands claude md "\$ARGUMENTS" "$base_dir/.claude/commands" "$script" ;;
+      generate_commands claude md "\$ARGUMENTS" "$base_dir/.claude/commands" "$script"
+      if [[ -f templates/agents/hooks/specify-ai-assistant-upgrade.sh ]]; then
+        mkdir -p "$base_dir/.claude/hooks"
+        cp templates/agents/hooks/specify-ai-assistant-upgrade.sh "$base_dir/.claude/hooks/specify-ai-assistant-upgrade-claude.sh"
+        chmod +x "$base_dir/.claude/hooks/specify-ai-assistant-upgrade-claude.sh"
+      fi ;;
     gemini)
       mkdir -p "$base_dir/.gemini/commands"
       generate_commands gemini toml "{{args}}" "$base_dir/.gemini/commands" "$script"
@@ -190,7 +195,12 @@ build_variant() {
       ;;
     cursor-agent)
       mkdir -p "$base_dir/.cursor/commands"
-      generate_commands cursor-agent md "\$ARGUMENTS" "$base_dir/.cursor/commands" "$script" ;;
+      generate_commands cursor-agent md "\$ARGUMENTS" "$base_dir/.cursor/commands" "$script"
+      if [[ -f templates/agents/hooks/specify-ai-assistant-upgrade.sh ]]; then
+        mkdir -p "$base_dir/.cursor/hooks"
+        cp templates/agents/hooks/specify-ai-assistant-upgrade.sh "$base_dir/.cursor/hooks/specify-ai-assistant-upgrade-cursor.sh"
+        chmod +x "$base_dir/.cursor/hooks/specify-ai-assistant-upgrade-cursor.sh"
+      fi ;;
     qwen)
       mkdir -p "$base_dir/.qwen/commands"
       generate_commands qwen toml "{{args}}" "$base_dir/.qwen/commands" "$script"
@@ -218,7 +228,12 @@ build_variant() {
       generate_commands codebuddy md "\$ARGUMENTS" "$base_dir/.codebuddy/commands" "$script" ;;
     qodercli)
       mkdir -p "$base_dir/.qoder/commands"
-      generate_commands qodercli md "\$ARGUMENTS" "$base_dir/.qoder/commands" "$script" ;;
+      generate_commands qodercli md "\$ARGUMENTS" "$base_dir/.qoder/commands" "$script"
+      if [[ -f templates/agents/hooks/specify-ai-assistant-upgrade.sh ]]; then
+        mkdir -p "$base_dir/.qoder/hooks"
+        cp templates/agents/hooks/specify-ai-assistant-upgrade.sh "$base_dir/.qoder/hooks/specify-ai-assistant-upgrade-qoder.sh"
+        chmod +x "$base_dir/.qoder/hooks/specify-ai-assistant-upgrade-qoder.sh"
+      fi ;;
     amp)
       mkdir -p "$base_dir/.agents/commands"
       generate_commands amp md "\$ARGUMENTS" "$base_dir/.agents/commands" "$script" ;;
