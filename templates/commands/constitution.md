@@ -18,27 +18,87 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 If the project has no or minimal knowledge-base docs under `.specify/memory/` (e.g. `.specify/memory/product/product-overview.md` and `.specify/memory/architecture/tech-stack.md` are missing), run this **before** the constitution update so the project has a baseline. Skip if those files already exist and are populated.
 
-1. **Read shared rules** (required for quality):
-   - `.specify/settings/rules/doc-responsibility.md` — document boundaries and which docs to generate
-   - `.specify/settings/rules/doc-quality-criteria.md` — accuracy and readability rules (code references, MUST/SHOULD)
-   - `.specify/settings/rules/tech-stack-catalog.md` — tech stack categories
+**Output structure** under `.specify/memory/`:
+- `product/` — product-overview.md, domain-model-and-terms.md, storage-model-index.md
+- `architecture/` — tech-stack.md, system-pattern.md, external-integration.md, business-services.md, middleware-and-base.md
+- `norms/` — architecture-specific norm docs (e.g. database-norms.md, persistence-norms.md, service-layer-norms.md)
 
-2. **Phase 1 — Foundation**: Explore the repo, then create:
-   - `.specify/memory/product/product-overview.md` — product positioning, main modules, key flows (with code refs)
-   - `.specify/memory/architecture/tech-stack.md` — language, framework, middleware, base products, core libs (with versions and file:line refs). Prefer `mvn dependency:tree` (or equivalent) for real dependencies.
+**Principle**: Execute batches in strict order (batch 0 → 1 → 2 → 3); within a batch, tasks may run in parallel. Use TODO tracking. When delegating an agent, read and follow the steps defined in the referenced agent file; paths and reference docs are given below.
 
-3. **Phase 2 — Plan**: Decide which docs to generate using doc-responsibility.md:
-   - No business Web/RPC → skip Web/RPC interface norms; no DB → skip database-norms.md, persistence-norms.md; no external systems → skip external-integration.md.
-   - Architecture: traditional layered → service-layer-norms.md; DDD → domain-model-norms.md; etc.
+### Step 0: Read shared rules (required)
 
-4. **Phase 3 — Generate in batches** (strict order, batch-internal serial):
-   - **Batch 1**: `.specify/memory/architecture/system-pattern.md` — layering, module deps, directory tree, mermaid diagrams.
-   - **Batch 2** (conditional): external-integration.md, business-services.md, middleware-and-base.md under `.specify/memory/architecture/` when applicable.
-   - **Batch 3** (conditional): database-norms.md, service-layer-norms.md or domain-model-norms.md under `.specify/memory/norms/` when applicable.
+- `.specify/settings/rules/doc-responsibility.md` — document boundaries and which docs to generate
+- `.specify/settings/rules/doc-quality-criteria.md` — accuracy and readability (code refs, MUST/SHOULD)
+- `.specify/settings/rules/tech-stack-catalog.md` — tech stack categories
 
-5. **Phase 4**: Update `.specify/memory/AGENTS.md`: scan `.specify/memory/product/`, `.specify/memory/architecture/`, `.specify/memory/norms/` and refresh the **应用知识** table inside `<project_rules>` (technology, scenarios, keywords, file path with `.specify/memory/` prefix).
+### Step 1: Generate foundation docs (batch 0)
 
-Rules: every claim must have a code reference (path:line). Use MUST/SHOULD/MAY. Prefer less content over wrong content. Single doc ≤500 lines. Then proceed to the constitution update below.
+**Check**: Use Glob to see if `.specify/memory/product/product-overview.md` and `.specify/memory/architecture/tech-stack.md` exist. If both exist, skip batch 0. Otherwise continue.
+
+**Delegate** (parallel):
+
+| Agent | Output path |
+|-------|-------------|
+| Execute steps from `.specify/agents/docs/product-context-writer.md` | `.specify/memory/product/product-overview.md` |
+| Execute steps from `.specify/agents/docs/tech-stack-analyzer.md` | `.specify/memory/architecture/tech-stack.md` |
+
+When invoking each agent, pass the output path above and any user input about product or tech stack. After completion, read both docs to plan later batches.
+
+### Step 2: Determine document list
+
+Using batch 0 outputs and `.specify/settings/rules/doc-responsibility.md`:
+
+**Skip rules** (do not generate if condition holds):
+- No business Web/HTTP APIs (or only non-business e.g. health checks) → skip Web-interface norms
+- No business RPC APIs → skip RPC-interface norms
+- No database → skip database-norms.md, persistence-norms.md
+- No external system integration → skip external-integration.md
+- No persistence layer → skip storage-model-index.md
+- No shared internal tools → skip common-internal-tools (if applicable)
+- No business service encapsulation → skip business-services.md
+- No middleware/base-product wrappers → skip middleware-and-base.md
+
+**Architecture norms**: Read the "norms" table in doc-responsibility.md; from tech-stack.md and system-pattern.md identify architecture (e.g. traditional layered, DDD, COLA, CQRS, hexagonal) and derive the list of norm docs to generate under `.specify/memory/norms/`.
+
+Optionally output a short **document generation plan** (batch 0 done, batch 1–3 planned with conditions).
+
+### Step 3: Delegate agents by batch
+
+**Batch 1** (after batch 0): One doc.
+
+| Agent | Output | Reference docs |
+|-------|--------|----------------|
+| `.specify/agents/docs/system-pattern-analyzer.md` | `.specify/memory/architecture/system-pattern.md` | product-overview.md, tech-stack.md |
+
+Wait for batch 1 to complete before batch 2.
+
+**Batch 2** (conditional; depends on batch 0 + 1):
+
+| Agent | Output | Condition |
+|-------|--------|-----------|
+| `.specify/agents/docs/domain-model-extractor.md` | `.specify/memory/product/domain-model-and-terms.md` | Always |
+| `.specify/agents/docs/storage-model-extractor.md` | `.specify/memory/product/storage-model-index.md` | Has persistence layer |
+| `.specify/agents/docs/capability-indexer.md` | `.specify/memory/architecture/external-integration.md` | Has external system integration |
+| `.specify/agents/docs/capability-indexer.md` | `.specify/memory/architecture/common-internal-tools.md` | Has shared internal tools |
+| `.specify/agents/docs/business-service-indexer.md` | `.specify/memory/architecture/business-services.md` | Has business service encapsulation |
+| `.specify/agents/docs/middleware-wrapper-indexer.md` | `.specify/memory/architecture/middleware-and-base.md` | Has middleware/base-product wrappers |
+| `.specify/agents/docs/constitution-writer.md` | `.specify/memory/norms/database-norms.md` | Has database |
+
+For each, pass the output path and reference docs (e.g. tech-stack.md, system-pattern.md, product-overview.md as needed). Wait for batch 2 before batch 3.
+
+**Batch 3** (architecture-specific norms): From Step 2, for each norm doc in the list (e.g. Web-interface norms, RPC-interface norms, service-layer-norms.md, domain-model-norms.md, persistence-norms.md), delegate `.specify/agents/docs/constitution-writer.md` with output path `.specify/memory/norms/<norm-name>.md` and reference docs (tech-stack.md, system-pattern.md, domain-model-and-terms.md). Follow doc-responsibility.md and system-pattern for which norms apply.
+
+**Execution**: Strict batch order; within a batch run in parallel if supported. On success continue; on failure record reason and skip or stop critical batches as appropriate.
+
+### Step 4: Update index
+
+Refresh `.specify/memory/AGENTS.md`: scan `.specify/memory/product/`, `.specify/memory/architecture/`, `.specify/memory/norms/` and update the application-knowledge table inside `<project_rules>` (columns: technology, scenarios, keywords, file path with `.specify/memory/` prefix). Either invoke the index-refresher agent or execute the steps defined in `.specify/agents/index-refresher.md` (same outcome).
+
+### Step 5: Summary report
+
+Summarize generated docs by category (product, architecture, norms): list created files and, for any skipped or failed, brief reason. Optionally total counts per category.
+
+**Quality rules**: Every claim must have a code reference (path:line). Use MUST/SHOULD/MAY. Prefer less content over wrong content. Single doc ≤500 lines. Then proceed to the constitution update below.
 
 ## Outline
 
